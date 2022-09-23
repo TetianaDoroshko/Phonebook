@@ -13,3 +13,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.ant-layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightsteelblue;
+  height: 100px;
+}
