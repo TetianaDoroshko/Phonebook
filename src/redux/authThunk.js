@@ -5,19 +5,26 @@ export const signupThunk = createAsyncThunk(
   'auth/signup',
   async (newUser, thunkAPI) => {
     try {
-      const { data } = await axiosContacts.post('/users/signup', newUser);
+      const { data } = await axiosContacts.post('/api/auth/signup', newUser);
       addToken(data.token);
       return data;
     } catch (error) {
-      console.log({
-        error,
-      });
-      return thunkAPI.rejectWithValue({
-        message: error.message,
-        name: error.response?.data?.errors?.name?.message ?? null,
-        email: error.response?.data?.errors?.email?.message ?? null,
-        password: error.response?.data?.errors?.password?.message ?? null,
-      });
+      const err = { message: error.message };
+
+      if (error.response?.data?.message.split(' ')[0] === '"name"') {
+        err.name = error.response?.data?.message.split(' ').slice(1).join(' ');
+      }
+      if (error.response?.data?.message.split(' ')[0] === '"email"') {
+        err.email = error.response?.data?.message.split(' ').slice(1).join(' ');
+      }
+      if (error.response?.data?.message.split(' ')[0] === '"password"') {
+        err.password = error.response?.data?.message
+          .split(' ')
+          .slice(1)
+          .join(' ');
+      }
+
+      return thunkAPI.rejectWithValue(err);
     }
   }
 );
@@ -55,7 +62,7 @@ export const refreshThunk = createAsyncThunk(
 
     addToken(savedToken);
     try {
-      const { data } = await axiosContacts.get('/users/current');
+      const { data } = await axiosContacts.get('/api/auth/current');
       return data;
     } catch (error) {
       removeToken();

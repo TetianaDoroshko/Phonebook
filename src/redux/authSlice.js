@@ -15,12 +15,14 @@ const initialState = {
   loading: false,
   error: null,
   isLoggedIn: false,
+  isVerify: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
+    // sign up
     [signupThunk.pending]: store => {
       store.loading = true;
       store.error = null;
@@ -60,6 +62,7 @@ const authSlice = createSlice({
       store.loading = false;
       store.error = action.payload;
     },
+    // refresh
     [refreshThunk.pending]: store => {
       store.loading = true;
       store.error = null;
