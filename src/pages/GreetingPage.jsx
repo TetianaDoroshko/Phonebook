@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import logoLg from 'images/phone-book (3).png';
 import { Image } from 'antd';
 import { Link } from 'react-router-dom';
+import { refreshThunk } from 'redux/authThunk';
 
 export const GreetingPage = () => {
   const name = useSelector(store => store.auth.user.name);

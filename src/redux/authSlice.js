@@ -4,7 +4,9 @@ import {
   loginThunk,
   logoutThunk,
   refreshThunk,
+  verifyThunk,
 } from './authThunk';
+import { store } from './store';
 
 const initialState = {
   user: {
@@ -24,8 +26,8 @@ const authSlice = createSlice({
   extraReducers: {
     // sign up
     [signupThunk.pending]: store => {
+      store = initialState;
       store.loading = true;
-      store.error = null;
     },
     [signupThunk.fulfilled]: (store, action) => {
       store.loading = false;
@@ -37,6 +39,20 @@ const authSlice = createSlice({
       store.loading = false;
       store.error = action.payload;
     },
+    // verify token
+    [verifyThunk.pending]: store => {
+      store.loading = true;
+      store.error = null;
+    },
+    [verifyThunk.fulfilled]: (store, action) => {
+      store.loading = false;
+      store.isVerify = true;
+    },
+    [verifyThunk.rejected]: (store, action) => {
+      store.loading = false;
+      // store.error = action.payload;
+    },
+    //
     [loginThunk.pending]: store => {
       store.loading = true;
       store.error = null;

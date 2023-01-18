@@ -29,6 +29,21 @@ export const signupThunk = createAsyncThunk(
   }
 );
 
+export const verifyThunk = createAsyncThunk(
+  'auth/verify',
+  async (verificationToken, thunkAPI) => {
+    try {
+      const { data } = await axiosContacts.get(
+        `/api/auth/verify/${verificationToken}`
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const loginThunk = createAsyncThunk(
   'auth/login',
   async (user, thunkAPI) => {

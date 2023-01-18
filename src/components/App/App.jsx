@@ -13,6 +13,7 @@ import { refreshThunk } from 'redux/authThunk';
 import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from 'components/PrivateRoute/PublicRoute';
 import { GreetingPage } from 'pages/GreetingPage';
+import { VerifyingPage } from 'pages/VerifyingPage';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,10 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<GreetingPage />} />
+            <Route
+              path="verify/:verificationToken"
+              element={<VerifyingPage />}
+            />
             <Route
               path="register"
               element={
