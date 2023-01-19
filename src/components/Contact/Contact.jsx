@@ -32,7 +32,7 @@ export const Contact = ({ contact }) => {
         <Button
           type="primary"
           ghost
-          onClick={() => deleteContact(contact.id)}
+          onClick={() => deleteContact(contact._id)}
           disabled={isLoading}
         >
           {isLoading ? <SpinnerForButton /> : 'Delete'}
@@ -59,7 +59,7 @@ export const Contact = ({ contact }) => {
       <List.Item.Meta
         avatar={<Avatar src={person} />}
         title={contact.name}
-        description={contact.number}
+        description={contact.phone}
         style={{ textAlign: 'left', fontSize: '29px' }}
       />
     </List.Item>

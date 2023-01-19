@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const { data: contacts } = useGetContactsQuery();
@@ -28,7 +28,7 @@ export const ContactForm = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(`We can't add a new contact.`);
+      toast.error(`Can't add a new contact.`);
     }
   }, [isError]);
 
@@ -38,8 +38,8 @@ export const ContactForm = () => {
       case 'name':
         setName(evt[0].value);
         break;
-      case 'number':
-        setNumber(evt[0].value);
+      case 'phone':
+        setPhone(evt[0].value);
         break;
       default:
         break;
@@ -54,7 +54,7 @@ export const ContactForm = () => {
     addContact(value);
 
     setName('');
-    setNumber('');
+    setPhone('');
     formRef.current.resetFields();
   };
 
@@ -82,24 +82,15 @@ export const ContactForm = () => {
           name="name"
           rules={[{ required: true, message: 'Please, input your username' }]}
         >
-          <Input
-            value={name}
-            type="text"
-            name="name"
-          />
+          <Input value={name} type="text" name="name" />
         </Form.Item>
 
         <Form.Item
-          label="Number"
-          name="number"
+          label="Phone Number"
+          name="phone"
           rules={[{ required: true, message: 'Please, input your password' }]}
         >
-          <Input
-            autoComplete="off"
-            type="tel"
-            name="number"
-            value={number}
-          />
+          <Input autoComplete="off" type="tel" name="phone" value={phone} />
         </Form.Item>
 
         <Form.Item>

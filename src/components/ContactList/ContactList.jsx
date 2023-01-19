@@ -39,7 +39,7 @@ export const ContactList = () => {
         className="demo-loadmore-list"
         itemLayout="horizontal"
         dataSource={renderList}
-        renderItem={contact => <Contact key={contact.id} contact={contact} />}
+        renderItem={contact => <Contact key={contact._id} contact={contact} />}
       />
     </>
   );

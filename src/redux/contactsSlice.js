@@ -28,19 +28,19 @@ const axiosBaseQuery =
 export const contactsApi = createApi({
   reducerPath: 'contacts',
   baseQuery: axiosBaseQuery({
-    baseUrl: 'https://connections-api.herokuapp.com',
+    baseUrl: 'http://localhost:5000',
   }),
   endpoints: builder => ({
     getContacts: builder.query({
       query: () => ({
-        url: '/contacts',
+        url: '/api/contacts',
         method: 'GET',
       }),
       providesTags: ['Contacts'],
     }),
     addContacts: builder.mutation({
       query: newContact => ({
-        url: '/contacts',
+        url: '/api/contacts',
         method: 'POST',
         data: newContact,
       }),
@@ -48,15 +48,15 @@ export const contactsApi = createApi({
     }),
     deleteContacts: builder.mutation({
       query: id => ({
-        url: `/contacts/${id}`,
+        url: `/api/contacts/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Contacts'],
     }),
     updateContacts: builder.mutation({
       query: ({ id, user }) => ({
-        url: `/contacts/${id}`,
-        method: 'PATCH',
+        url: `/api/contacts/${id}`,
+        method: 'PUT',
         data: user,
       }),
       invalidatesTags: ['Contacts'],

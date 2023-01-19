@@ -5,9 +5,9 @@ import toast from 'react-hot-toast';
 
 export const ModalUpdateContact = ({ contact, close, isOpen }) => {
   const [name, setName] = useState(contact.name);
-  const [number, setNumber] = useState(contact.number);
+  const [phone, setPhone] = useState(contact.phone);
 
-  const [updateContacts] = useUpdateContactsMutation();
+  const [updateContacts, result] = useUpdateContactsMutation();
 
   const onChangeField = evt => {
     const fieldName = evt[0]?.name[0] ?? null;
@@ -15,8 +15,8 @@ export const ModalUpdateContact = ({ contact, close, isOpen }) => {
       case 'name':
         setName(evt[0].value);
         break;
-      case 'number':
-        setNumber(evt[0].value);
+      case 'phone':
+        setPhone(evt[0].value);
         break;
       default:
         break;
@@ -24,8 +24,7 @@ export const ModalUpdateContact = ({ contact, close, isOpen }) => {
   };
 
   const handleSubmit = e => {
-    console.log(e);
-    updateContacts({ id: contact.id, user: { name, number } })
+    updateContacts({ id: contact._id, user: { name, phone } })
       .then(() => toast.success(`${name} was updated in your phonebook.`))
       .catch(() => toast.error(`Error happend. We can't update the contact.`));
     close();
@@ -56,16 +55,16 @@ export const ModalUpdateContact = ({ contact, close, isOpen }) => {
         </Form.Item>
 
         <Form.Item
-          label="Number"
-          name="number"
-          rules={[{ required: true, message: 'Please, input a number' }]}
+          label="Phone Number"
+          name="phone"
+          rules={[{ required: true, message: 'Please, input a phone number' }]}
         >
           <Input
             autoComplete="off"
             type="tel"
-            name="number"
-            value={number}
-            defaultValue={number}
+            name="phone"
+            value={phone}
+            defaultValue={phone}
           />
         </Form.Item>
       </Form>
