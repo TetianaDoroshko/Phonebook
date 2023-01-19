@@ -8,11 +8,28 @@ import { Link } from 'react-router-dom';
 
 export const AppBar = () => {
   const isLoggedIn = useSelector(store => store.auth.isLoggedIn) ?? false;
+  const avatar = useSelector(store => store.auth.user.avatar);
+  const name = useSelector(store => store.auth.user.name);
+
   return (
     <Header>
       <Link to="/">
-        <Space style={{ alignItems: 'center' }}>
-          <Image width={80} src={logo} preview={false} />{' '}
+        <Space style={{ alignItems: 'center', position: 'relative' }}>
+          <Image width={80} src={logo} preview={false} />
+          {avatar && (
+            <img
+              src={avatar}
+              alt={`${name}'s avatar`}
+              style={{
+                position: 'absolute',
+                height: '55px',
+                width: '55px',
+                top: '12px',
+                left: '9px',
+                borderRadius: '50%',
+              }}
+            />
+          )}
           <Typography.Title style={{ marginBottom: '0', fontSize: '26px' }}>
             Phonebook
           </Typography.Title>

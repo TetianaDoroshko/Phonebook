@@ -48,7 +48,7 @@ export const loginThunk = createAsyncThunk(
   'auth/login',
   async (user, thunkAPI) => {
     try {
-      const { data } = await axiosContacts.post('/users/login', user);
+      const { data } = await axiosContacts.post('/api/auth/login', user);
       addToken(data.token);
       return data;
     } catch (error) {
@@ -61,8 +61,8 @@ export const logoutThunk = createAsyncThunk(
   'auth/logout',
   async (_, thunkAPI) => {
     try {
-      await axiosContacts.post('/users/logout');
-      removeToken(thunkAPI.getState().auth.token);
+      await axiosContacts.get('/api/auth/logout');
+      removeToken();
       return;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

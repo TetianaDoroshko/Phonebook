@@ -6,7 +6,6 @@ import {
   refreshThunk,
   verifyThunk,
 } from './authThunk';
-import { store } from './store';
 
 const initialState = {
   user: {
@@ -26,7 +25,11 @@ const authSlice = createSlice({
   extraReducers: {
     // sign up
     [signupThunk.pending]: store => {
-      store = initialState;
+      store.user = initialState.user;
+      store.token = null;
+      store.error = null;
+      store.isLoggedIn = false;
+      store.isVerify = false;
       store.loading = true;
     },
     [signupThunk.fulfilled]: (store, action) => {
@@ -52,7 +55,7 @@ const authSlice = createSlice({
       store.loading = false;
       // store.error = action.payload;
     },
-    //
+    // login
     [loginThunk.pending]: store => {
       store.loading = true;
       store.error = null;
@@ -62,11 +65,13 @@ const authSlice = createSlice({
       store.user = action.payload.user;
       store.token = action.payload.token;
       store.isLoggedIn = true;
+      store.isVerify = true;
     },
     [loginThunk.rejected]: (store, action) => {
       store.loading = false;
       store.error = action.payload;
     },
+    // logout
     [logoutThunk.pending]: store => {
       store.loading = true;
       store.error = null;
@@ -85,9 +90,9 @@ const authSlice = createSlice({
     },
     [refreshThunk.fulfilled]: (store, action) => {
       store.loading = false;
-
       store.user = action.payload;
       store.isLoggedIn = true;
+      store.isVerify = true;
     },
     [refreshThunk.rejected]: (store, action) => {
       store.loading = false;
