@@ -5,6 +5,7 @@ import { Layout, Image, Typography, Space } from 'antd';
 import logo from 'images/phone-book (1).png';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { AvatarHeader } from './AppBar.styled';
 
 export const AppBar = () => {
   const isLoggedIn = useSelector(store => store.auth.isLoggedIn) ?? false;
@@ -16,20 +17,7 @@ export const AppBar = () => {
       <Link to="/">
         <Space style={{ alignItems: 'center', position: 'relative' }}>
           <Image width={80} src={logo} preview={false} />
-          {avatar && (
-            <img
-              src={avatar}
-              alt={`${name}'s avatar`}
-              style={{
-                position: 'absolute',
-                height: '55px',
-                width: '55px',
-                top: '12px',
-                left: '9px',
-                borderRadius: '50%',
-              }}
-            />
-          )}
+          {avatar && <AvatarHeader src={avatar} alt={`${name}'s avatar`} />}
           <Typography.Title style={{ marginBottom: '0', fontSize: '26px' }}>
             Phonebook
           </Typography.Title>

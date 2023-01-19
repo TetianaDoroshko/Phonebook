@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import logoLg from 'images/phone-book (3).png';
 import { Image } from 'antd';
 import { Link } from 'react-router-dom';
-import { refreshThunk } from 'redux/authThunk';
+import { Avatar } from '../components/AppBar/AppBar.styled';
 
 export const GreetingPage = () => {
   const name = useSelector(store => store.auth.user.name);
@@ -18,20 +18,7 @@ export const GreetingPage = () => {
         style={{ position: 'relative', display: 'inline-block' }}
       >
         <Image src={logoLg} preview={false} />
-        {avatar && (
-          <img
-            src={avatar}
-            alt={`${name}'s avatar`}
-            style={{
-              position: 'absolute',
-              height: '80px',
-              width: '80px',
-              top: '30px',
-              left: '110px',
-              borderRadius: '50%',
-            }}
-          />
-        )}
+        {avatar && <Avatar src={avatar} alt={`${name}'s avatar`} />}
       </Link>{' '}
       {!isVerify && (
         <p>
