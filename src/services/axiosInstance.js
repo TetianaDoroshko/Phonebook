@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 export const axiosContacts = axios.create({
-  baseURL: 'http://localhost:5000',
-  // baseURL: 'https://phonebook-rest-api.vercel.app',
-  // headers: { 'Content-Type': 'application/json' },
+  // baseURL: 'http://localhost:5000',
+  baseURL: 'https://phonebook-rest-api.vercel.app',
 });
 
 export const addToken = token => {

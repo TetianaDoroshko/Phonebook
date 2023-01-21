@@ -15,22 +15,20 @@ export const ContactForm = () => {
 
   const { data: contacts } = useGetContactsQuery();
 
-  const [addContact, { isLoading, isError, isSuccess, data }] =
-    useAddContactsMutation();
+  const [addContact, result] = useAddContactsMutation();
+
+  const { isLoading, isError, isSuccess, error, data } = result;
 
   const formRef = useRef();
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(`${data.name} is added to your phonebook.`);
+      toast.success(`${data?.name} is added to your phonebook.`);
     }
-  }, [isSuccess, data?.name]);
-
-  useEffect(() => {
     if (isError) {
-      toast.error(`Can't add a new contact.`);
+      toast.error(`Can't add a new contact. ${error?.data?.message}`);
     }
-  }, [isError]);
+  }, [data, error, isError, isSuccess]);
 
   const onChangeField = evt => {
     const fieldName = evt[0]?.name[0] ?? null;

@@ -28,7 +28,8 @@ const axiosBaseQuery =
 export const contactsApi = createApi({
   reducerPath: 'contacts',
   baseQuery: axiosBaseQuery({
-    baseUrl: 'http://localhost:5000',
+    // baseUrl: 'http://localhost:5000',
+    baseUrl: 'https://vercel.com/tetianadoroshko/phonebook-rest-api',
   }),
   endpoints: builder => ({
     getContacts: builder.query({
