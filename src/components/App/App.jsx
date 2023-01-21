@@ -23,8 +23,8 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    // <BrowserRouter basename="/Phonebook">
-    <BrowserRouter>
+    <BrowserRouter basename="/Phonebook">
+      {/* <BrowserRouter> */}
       <PersistGate loading={null} persistor={persistor}>
         <GlobalStyle />
         <Toaster />
